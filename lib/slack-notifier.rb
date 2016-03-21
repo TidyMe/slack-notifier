@@ -41,6 +41,12 @@ module Slack
       client.post endpoint, params
     end
 
+    def ping_async message, options={}
+      Thread.new do
+        ping message, options
+      end
+    end
+
     def http_client
       default_payload.fetch :http_client, DefaultHTTPClient
     end
